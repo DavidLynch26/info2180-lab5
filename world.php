@@ -6,28 +6,56 @@ $dbname = 'world';
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 
+$city = false;
+
 if(isset($_GET['country'])){
   $searchVal = $_GET['country'];
   $country = filter_var($searchVal, FILTER_SANITIZE_STRING);
-  $stmt = $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
-}
+  $queryString = "SELECT * FROM countries WHERE name LIKE '%$country%'";
+
+  if(isset($_GET['lookup'])){
+    $lookup = $_GET['lookup'];
+    $city = true;
+    $headings = array("Name", "District", "Population");
+
+    $stmt = $conn->query($queryString);
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $strResult = $results[0]['code'];
+
+    $queryString = "SELECT cities.name, cities.district, cities.population FROM cities JOIN countries ON countries.code = cities.country_code WHERE countries.code LIKE '%$strResult%'";
+
+    ?>
+    <p><?=$queryString.$strResult; ?></p>
+<?php
+  }else{
+    $headings = array("Name", "Continent", "Independence Year", "Head of State");
+  }
+  $stmt = $conn->query($queryString);
+ }
 
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <table>
   <tr>
-  <th>Name</th>
-  <th>Continent</th>
-  <th>Independence Year</th>
-  <th>Head of State</th>		
+    <?php foreach($headings as $heading): ?>
+      <td><?=$heading; ?></td>
+    <?php endforeach; ?>	
   </tr>
 <?php foreach ($results as $row): ?>
   <tr>
-  <td><?= $row['name']; ?></td>
-  <td><?= $row['continent']; ?></td>
-  <td><?= $row['independence_year']; ?></td>
-  <td><?= $row['head_of_state']; ?></td>
+  <?php
+    if(!$city): ?>
+      <td><?= $row['name']; ?></td>
+      <td><?= $row['continent']; ?></td>
+      <td><?= $row['independence_year']; ?></td>
+      <td><?= $row['head_of_state']; ?></td>
+    <?php else: ?>
+      <td><?= $row['name']; ?></td>
+      <td><?= $row['district']; ?></td>
+      <td><?= $row['population']; ?></td>
+    <?php endif; ?>
   </tr>
   <?php endforeach; ?>
 </table>
