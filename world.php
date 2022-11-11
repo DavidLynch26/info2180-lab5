@@ -25,9 +25,6 @@ if(isset($_GET['country'])){
 
     $queryString = "SELECT cities.name, cities.district, cities.population FROM cities JOIN countries ON countries.code = cities.country_code WHERE countries.code LIKE '%$strResult%'";
 
-    ?>
-    <p><?=$queryString.$strResult; ?></p>
-<?php
   }else{
     $headings = array("Name", "Continent", "Independence Year", "Head of State");
   }
