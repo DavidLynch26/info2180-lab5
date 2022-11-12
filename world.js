@@ -1,15 +1,16 @@
 window.onload = function(){
     var country;
+    var rows;
 
     document.getElementById("lookup").addEventListener("click", function(event){
         event.preventDefault();
 
-        country = country = document.getElementById("country").value.trim().replace(/(<([^>]+)>)/gi, "");
+        country = document.getElementById("country").value.trim().replace(/(<([^>]+)>)/gi, "");
 
-        // fetch("world.php?country="+country) Using fetch API
+        // fetch("world.php?country="+country) 
         //     .then(response => response.text())
         //     .then(data => {
-        //         document.getElementById("result").innerHTML = this.responseText;
+        //         document.getElementById("result").innerHTML = data;
         //     })
 
         const xhttp = new XMLHttpRequest();
@@ -25,7 +26,7 @@ window.onload = function(){
     document.getElementById("lookupCity").addEventListener("click", function(event){
         event.preventDefault();
 
-        country = country = document.getElementById("country").value.trim().replace(/(<([^>]+)>)/gi, "");
+        country = document.getElementById("country").value.trim().replace(/(<([^>]+)>)/gi, "");
 
         if(country !== ""){
             const xhttp2 = new XMLHttpRequest();

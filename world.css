@@ -2,11 +2,12 @@
 
 header{
     display: flex;
-    background-color:darkred;
+    background-color:dimgray;
     color: white;
     justify-content: center;
     align-items: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 50px;
 }
 
 header img{
@@ -23,19 +24,20 @@ main button{
     border-radius: 5px;
 }
 
+button{
+    width: 100px;
+    height: 50px;
+}
+
 table{
+    margin-top: 20px;
     border-collapse: collapse;
     width: 100%;
 }
 
-div th{
-    text-align: center;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+td, th{
+    border: 1px solid #ddd;
+    padding: 8px;  
 }
 
 tr :nth-child(even){

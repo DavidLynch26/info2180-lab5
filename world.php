@@ -37,7 +37,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <table>
   <tr>
     <?php foreach($headings as $heading): ?>
-      <td><?=$heading; ?></td>
+      <th><?=$heading; ?></th>
     <?php endforeach; ?>	
   </tr>
 <?php foreach ($results as $row): ?>
